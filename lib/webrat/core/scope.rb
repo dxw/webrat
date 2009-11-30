@@ -333,7 +333,15 @@ module Webrat
     end
 
     def scoped_dom
-      @scope.dom.css(@selector).first
+      begin
+        @scope.dom.css(@selector).first
+      rescue Nokogiri::CSS::SyntaxError => e
+        begin
+          @scope.dom.xpath(@selector).first
+        rescue Nokogiri::XML::XPath::SyntaxError
+          raise e
+        end
+      end
     end
 
     def locate_field(field_locator, *field_types) #:nodoc:
