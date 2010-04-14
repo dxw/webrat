@@ -357,6 +357,8 @@ module Webrat
         end
       when :rack, :merb
         Rack::Test::UploadedFile.new(@original_value, content_type)
+      when :mechanize
+        open(@original_value) if @original_value.present?
       end
     end
 
