@@ -52,7 +52,7 @@ module Webrat
       :select_option,
       :set_hidden_field, :submit_form,
       :request_page, :current_dom,
-      :response_body,
+      :response, :response_body,
       :selects_date, :selects_time, :selects_datetime,
       :select_date, :select_time, :select_datetime,
       :field_by_xpath,

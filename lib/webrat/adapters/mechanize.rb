@@ -6,7 +6,6 @@ module Webrat #:nodoc:
 
     Mechanize = WWW::Mechanize if defined?(WWW::Mechanize)
 
-    attr_accessor :response
     alias :page :response
 
     def initialize(*args)
@@ -49,6 +48,15 @@ module Webrat #:nodoc:
 
     def response_headers
       @response.header
+    end
+
+    def response
+      @response.instance_eval do
+        def method_missing(method, *args)
+          content.send(method, *args)
+        end
+      end
+      @response
     end
 
     def mechanize
