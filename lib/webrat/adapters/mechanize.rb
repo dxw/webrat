@@ -6,8 +6,6 @@ module Webrat #:nodoc:
 
     Mechanize = WWW::Mechanize if defined?(WWW::Mechanize)
 
-    alias :page :response
-
     def initialize(*args)
     end
 
@@ -58,6 +56,8 @@ module Webrat #:nodoc:
       end
       @response
     end
+
+    alias :page :response
 
     def mechanize
       @mechanize ||= begin

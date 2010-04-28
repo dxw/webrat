@@ -104,6 +104,9 @@ For example:
     def basic_auth(user, pass)
       encoded_login = ["#{user}:#{pass}"].pack("m*").gsub(/\n/, '')
       header('HTTP_AUTHORIZATION', "Basic #{encoded_login}")
+      if Webrat.adapter_class == MechanizeAdapter
+        self.adapter.mechanize.auth(user, pass)
+      end
     end
 
     def headers #:nodoc:
